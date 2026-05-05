@@ -1,123 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strategic Tech Architect | Digital Solutions</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root { --primary: #6366f1; --accent: #00f2ff; }
-        body { font-family: 'Inter', sans-serif; background: #020617; color: #f8fafc; scroll-behavior: smooth; }
-        .glass-card { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .glass-card:hover { border-color: var(--primary); transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2); }
-        .mesh-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #020617 100%); }
-        .glow { position: absolute; width: 300px; height: 300px; background: var(--primary); filter: blur(120px); opacity: 0.2; border-radius: 50%; z-index: -1; }
-        .animated-text { background: linear-gradient(to right, #818cf8, #c084fc, #00f2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .status-badge { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #4ade80; padding: 4px 12px; border-radius: 99px; font-size: 12px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Core | AI Automation & Digital Architecture</title>
+  <meta name="description" content="Premium AI automation, Python systems, data architecture, and business software solutions for global buyers." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #05070d;
+      --panel: rgba(12, 18, 32, 0.74);
+      --panel-strong: rgba(14, 24, 42, 0.94);
+      --line: rgba(255, 255, 255, 0.11);
+      --text: #f8fafc;
+      --muted: #a9b4c7;
+      --primary: #5eead4;
+      --secondary: #8b5cf6;
+      --accent: #f59e0b;
+      --danger: #fb7185;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        linear-gradient(180deg, rgba(5, 7, 13, 0.2), var(--bg) 44%),
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2200&q=85") center top / cover fixed,
+        var(--bg);
+      color: var(--text);
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        linear-gradient(rgba(94, 234, 212, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(94, 234, 212, 0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 82%);
+    }
+
+    #networkCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.42;
+      pointer-events: none;
+    }
+
+    .nav-shell {
+      background: rgba(5, 7, 13, 0.72);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+      backdrop-filter: blur(18px);
+      border-radius: 8px;
+    }
+
+    .panel-strong {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+      border-radius: 8px;
+    }
+
+    .service-card {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      transition: transform 260ms ease, border-color 260ms ease, background 260ms ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(94, 234, 212, 0.55);
+      background: rgba(16, 25, 43, 0.92);
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      opacity: 0.75;
+    }
+
+    .text-gradient {
+      background: linear-gradient(90deg, #f8fafc 0%, #5eead4 42%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .badge {
+      border: 1px solid rgba(94, 234, 212, 0.32);
+      background: rgba(20, 184, 166, 0.09);
+      color: #99f6e4;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: #f8fafc;
+      color: #020617;
+      border-radius: 8px;
+      padding: 15px 22px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 220ms ease, background 220ms ease;
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); background: #5eead4; }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      color: #e5e7eb;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+      padding: 15px 22px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 220ms ease, border-color 220ms ease;
+    }
+
+    .btn-secondary:hover { transform: translateY(-2px); border-color: rgba(94, 234, 212, 0.65); }
+
+    .metric {
+      border-left: 1px solid rgba(255, 255, 255, 0.13);
+      padding-left: 20px;
+    }
+
+    .architecture-node {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.045);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .connector {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.8), transparent);
+    }
+
+    .timeline-item {
+      border-left: 1px solid rgba(94, 234, 212, 0.35);
+      padding-left: 28px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: 4px;
+      width: 13px;
+      height: 13px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(94, 234, 212, 0.12);
+    }
+
+    .stack-chip {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #dbeafe;
+      font-weight: 700;
+    }
+
+    .image-frame {
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: #0f172a;
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05) contrast(1.05);
+    }
+
+    .mobile-menu { display: none; }
+    .mobile-menu.open { display: grid; }
+
+    @media (max-width: 768px) {
+      body { background-attachment: scroll; }
+      .metric { border-left: 0; padding-left: 0; }
+      .hero-title { font-size: clamp(42px, 13vw, 72px); line-height: 0.94; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions a { justify-content: center; }
+    }
+  </style>
 </head>
 <body>
+  <canvas id="networkCanvas" aria-hidden="true"></canvas>
 
-    <div class="mesh-gradient"></div>
-    <div class="glow" style="top: 10%; left: 10%;"></div>
-    <div class="glow" style="bottom: 10%; right: 10%;"></div>
+  <nav class="nav-shell fixed top-0 left-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <span class="w-10 h-10 rounded-lg bg-teal-300 text-slate-950 grid place-items-center font-black">SC</span>
+        <span class="font-black text-lg">SYSTEM<span class="text-teal-300">CORE</span></span>
+      </a>
+      <div class="hidden lg:flex items-center gap-8 text-sm font-bold text-slate-300">
+        <a href="#solutions" class="hover:text-teal-300">Solutions</a>
+        <a href="#proof" class="hover:text-teal-300">Proof</a>
+        <a href="#process" class="hover:text-teal-300">Process</a>
+        <a href="#stack" class="hover:text-teal-300">Stack</a>
+        <a href="#contact" class="btn-primary py-3 px-5">Start Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <button id="menuButton" class="lg:hidden w-11 h-11 panel grid place-items-center" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobileMenu" class="mobile-menu lg:hidden px-5 pb-5 gap-3 text-sm font-bold">
+      <a href="#solutions" class="panel p-4">Solutions</a>
+      <a href="#proof" class="panel p-4">Proof</a>
+      <a href="#process" class="panel p-4">Process</a>
+      <a href="#stack" class="panel p-4">Stack</a>
+      <a href="#contact" class="panel p-4">Start Project</a>
+    </div>
+  </nav>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-md">
-        <div class="text-xl font-black tracking-widest">SYSTEM.<span class="text-indigo-500">CORE</span></div>
-        <div class="space-x-8 hidden md:flex items-center text-sm font-medium">
-            <a href="#services" class="hover:text-indigo-400 transition">Solutions</a>
-            <a href="#stack" class="hover:text-indigo-400 transition">Stack</a>
-            <a href="#contact" class="bg-indigo-600 px-6 py-2 rounded-full hover:shadow-[0_0_20px_rgba(99,102,241,0.5)] transition">Start Project</a>
+  <header class="min-h-screen pt-32 pb-16 px-5 md:px-8 flex items-center">
+    <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-[1.08fr_0.92fr] gap-10 items-center">
+      <div>
+        <div class="badge mb-6" data-aos="fade-down">
+          <span class="w-2 h-2 bg-emerald-400 rounded-full"></span>
+          Available for global automation builds
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="h-screen flex flex-col justify-center items-center text-center px-6">
-        <div class="status-badge mb-6" data-aos="fade-down">● Available for Global Projects</div>
-        <h1 class="text-5xl md:text-8xl font-black mb-6" data-aos="fade-up">
-            Developing <span class="animated-text">Intelligent</span><br>Digital Assets.
+        <h1 class="hero-title text-6xl md:text-8xl font-black leading-none mb-7" data-aos="fade-up">
+          Intelligent systems for buyers who need <span class="text-gradient">real business output.</span>
         </h1>
-        <p class="text-gray-400 max-w-2xl text-lg md:text-xl mb-10" data-aos="fade-up" data-aos-delay="200">
-            Specializing in high-accuracy Python automation, strategic AI integration, and high-conversion software architecture.
+        <p class="text-lg md:text-xl text-slate-300 max-w-3xl leading-relaxed mb-9" data-aos="fade-up" data-aos-delay="120">
+          I design and build AI assistants, Python automations, SQL data systems, dashboards, and micro-SaaS workflows that reduce manual work, improve accuracy, and give your team a measurable operating advantage.
         </p>
-        <div class="flex space-x-4" data-aos="fade-up" data-aos-delay="400">
-            <a href="#services" class="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-indigo-500 hover:text-white transition duration-300">View Ecosystem</a>
+        <div class="hero-actions flex gap-4 mb-12" data-aos="fade-up" data-aos-delay="220">
+          <a href="#contact" class="btn-primary">Discuss a Project <i class="fa-solid fa-paper-plane"></i></a>
+          <a href="#solutions" class="btn-secondary">Explore Solutions <i class="fa-solid fa-layer-group"></i></a>
         </div>
-    </header>
+        <div class="grid sm:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="320">
+          <div class="metric">
+            <div class="text-3xl font-black text-teal-300">99.9%</div>
+            <p class="text-sm text-slate-400 mt-1">Accuracy-focused automation logic</p>
+          </div>
+          <div class="metric">
+            <div class="text-3xl font-black text-amber-300">3x</div>
+            <p class="text-sm text-slate-400 mt-1">Faster workflows through custom tools</p>
+          </div>
+          <div class="metric">
+            <div class="text-3xl font-black text-violet-300">24/7</div>
+            <p class="text-sm text-slate-400 mt-1">Systems designed for continuous execution</p>
+          </div>
+        </div>
+      </div>
 
-    <!-- Why Us / Accuracy Section -->
-    <section id="accuracy" class="py-24 px-8 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div data-aos="fade-right">
-                <h2 class="text-4xl font-bold mb-6">Built for <span class="text-indigo-500">Precision.</span></h2>
-                <p class="text-gray-400 mb-8 text-lg">In the B2B world, accuracy is everything. My systems are stress-tested for 99.9% reliability in data handling and automation.</p>
-                <ul class="space-y-4">
-                    <li class="flex items-center"><i class="fas fa-check-circle text-indigo-500 mr-3"></i> Clean, Documented Python Logic</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-indigo-500 mr-3"></i> SQL Database Optimization</li>
-                    <li class="flex items-center"><i class="fas fa-check-circle text-indigo-500 mr-3"></i> Scalable Micro-SaaS Architecture</li>
-                </ul>
-            </div>
-            <div class="glass-card p-10 text-center" data-aos="fade-left">
-                <div class="text-6xl font-black text-indigo-500 mb-2">99.9%</div>
-                <div class="text-gray-400 uppercase tracking-widest text-sm">Execution Accuracy</div>
-                <div class="mt-8 h-2 bg-gray-800 rounded-full overflow-hidden">
-                    <div class="h-full bg-indigo-500 w-[99%]"></div>
-                </div>
-            </div>
+      <div class="panel-strong p-5 md:p-7" data-aos="zoom-in">
+        <div class="flex items-center justify-between mb-5">
+          <div>
+            <p class="text-xs uppercase text-slate-500 font-black">Live Architecture Preview</p>
+            <h2 class="text-xl font-black mt-1">Automation Command Center</h2>
+          </div>
+          <span class="badge">Online</span>
         </div>
+        <div class="image-frame aspect-[16/10] mb-5">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85" alt="Analytics dashboard with data visualization" />
+        </div>
+        <div class="grid grid-cols-2 gap-3 mb-4">
+          <div class="architecture-node">
+            <i class="fa-brands fa-python text-teal-300 text-xl mb-3"></i>
+            <h3 class="font-black">Python Engine</h3>
+            <p class="text-xs text-slate-400 mt-1">Scraping, ETL, APIs, reports</p>
+          </div>
+          <div class="architecture-node">
+            <i class="fa-solid fa-brain text-violet-300 text-xl mb-3"></i>
+            <h3 class="font-black">AI Layer</h3>
+            <p class="text-xs text-slate-400 mt-1">LLM agents, prompts, retrieval</p>
+          </div>
+        </div>
+        <div class="connector my-4"></div>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="architecture-node text-center">
+            <i class="fa-solid fa-database text-amber-300"></i>
+            <p class="text-xs font-bold mt-2">SQL</p>
+          </div>
+          <div class="architecture-node text-center">
+            <i class="fa-solid fa-chart-line text-teal-300"></i>
+            <p class="text-xs font-bold mt-2">Dashboard</p>
+          </div>
+          <div class="architecture-node text-center">
+            <i class="fa-solid fa-shield-halved text-rose-300"></i>
+            <p class="text-xs font-bold mt-2">Validation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="solutions" class="py-24 px-5 md:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl mb-14" data-aos="fade-up">
+          <span class="badge mb-5">Core Solutions</span>
+          <h2 class="text-4xl md:text-6xl font-black leading-tight">Everything a serious buyer needs before saying yes.</h2>
+          <p class="text-slate-400 text-lg mt-5">Clear deliverables, business-focused execution, and systems that can be explained, maintained, and scaled.</p>
+        </div>
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+          <article class="panel service-card p-7" data-aos="fade-up">
+            <i class="fa-solid fa-robot text-4xl text-teal-300 mb-7"></i>
+            <h3 class="text-2xl font-black mb-4">AI Business Assistants</h3>
+            <p class="text-slate-400 mb-6">Custom AI tools for lead qualification, customer support, research, internal knowledge search, and decision support.</p>
+            <ul class="space-y-3 text-sm text-slate-300">
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Prompt systems and workflows</li>
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Document-aware chatbots</li>
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Human handoff logic</li>
+            </ul>
+          </article>
+          <article class="panel service-card p-7" data-aos="fade-up" data-aos-delay="80">
+            <i class="fa-brands fa-python text-4xl text-amber-300 mb-7"></i>
+            <h3 class="text-2xl font-black mb-4">Python Automation</h3>
+            <p class="text-slate-400 mb-6">Scripts and backend jobs that remove repetitive operations from teams and reduce expensive manual errors.</p>
+            <ul class="space-y-3 text-sm text-slate-300">
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Excel, PDF, email automation</li>
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Web scraping and APIs</li>
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Error logs and retry flows</li>
+            </ul>
+          </article>
+          <article class="panel service-card p-7" data-aos="fade-up" data-aos-delay="160">
+            <i class="fa-solid fa-database text-4xl text-violet-300 mb-7"></i>
+            <h3 class="text-2xl font-black mb-4">Data Systems</h3>
+            <p class="text-slate-400 mb-6">Structured databases, reporting pipelines, and dashboards for teams that need fast, reliable information.</p>
+            <ul class="space-y-3 text-sm text-slate-300">
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>SQL schema design</li>
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Data cleaning pipelines</li>
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Analytics-ready exports</li>
+            </ul>
+          </article>
+          <article class="panel service-card p-7" data-aos="fade-up" data-aos-delay="240">
+            <i class="fa-solid fa-cubes text-4xl text-rose-300 mb-7"></i>
+            <h3 class="text-2xl font-black mb-4">Micro-SaaS Builds</h3>
+            <p class="text-slate-400 mb-6">Lean web apps and internal tools built around one high-value business workflow instead of unnecessary features.</p>
+            <ul class="space-y-3 text-sm text-slate-300">
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Admin dashboards</li>
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Role-based workflows</li>
+              <li><i class="fa-solid fa-check text-teal-300 mr-2"></i>Payment and API integration</li>
+            </ul>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- Services Grid -->
-    <section id="services" class="py-24 px-8 max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-16" data-aos="fade-up">Core Solutions</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass-card p-8" data-aos="fade-up">
-                <i class="fas fa-robot text-4xl text-indigo-500 mb-6"></i>
-                <h3 class="text-xl font-bold mb-4">AI Companions</h3>
-                <p class="text-gray-400">Custom LLM-based assistants tailored for business strategy and niche automation.</p>
-            </div>
-            <div class="glass-card p-8" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-code text-4xl text-blue-400 mb-6"></i>
-                <h3 class="text-xl font-bold mb-4">Automation Scripts</h3>
-                <p class="text-gray-400">Python-based workflows that eliminate manual tasks and human error.</p>
-            </div>
-            <div class="glass-card p-8" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-database text-4xl text-emerald-400 mb-6"></i>
-                <h3 class="text-xl font-bold mb-4">Data Systems</h3>
-                <p class="text-gray-400">Optimized SQL architectures for high-speed data retrieval and management.</p>
-            </div>
+    <section id="proof" class="py-24 px-5 md:px-8 bg-black/30">
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-[0.95fr_1.05fr] gap-10 items-center">
+        <div class="image-frame aspect-[4/5]" data-aos="fade-right">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=85" alt="Professional team reviewing digital strategy" />
         </div>
+        <div data-aos="fade-left">
+          <span class="badge mb-5">Buyer Confidence</span>
+          <h2 class="text-4xl md:text-6xl font-black leading-tight mb-6">Detailed enough for technical teams. Clear enough for business owners.</h2>
+          <p class="text-slate-400 text-lg leading-relaxed mb-8">
+            Every project is built with a practical delivery model: discovery, architecture, prototype, validation, deployment, and handover. You get clean logic, transparent scope, and documentation that makes the system understandable after delivery.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="panel p-6">
+              <div class="text-3xl font-black text-teal-300 mb-2">A+</div>
+              <h3 class="font-black mb-2">System clarity</h3>
+              <p class="text-sm text-slate-400">Architecture diagrams, setup notes, and clean handover documentation.</p>
+            </div>
+            <div class="panel p-6">
+              <div class="text-3xl font-black text-amber-300 mb-2">0 guesswork</div>
+              <h3 class="font-black mb-2">Scope control</h3>
+              <p class="text-sm text-slate-400">Clear milestones, deliverables, test cases, and acceptance points.</p>
+            </div>
+            <div class="panel p-6">
+              <div class="text-3xl font-black text-violet-300 mb-2">API-ready</div>
+              <h3 class="font-black mb-2">Integrations</h3>
+              <p class="text-sm text-slate-400">Connect CRMs, sheets, databases, payment tools, and AI services.</p>
+            </div>
+            <div class="panel p-6">
+              <div class="text-3xl font-black text-rose-300 mb-2">Secure</div>
+              <h3 class="font-black mb-2">Responsible build</h3>
+              <p class="text-sm text-slate-400">Input validation, sensible access control, logs, and safe deployment habits.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Tech Stack -->
-    <section id="stack" class="py-24 bg-indigo-900/10">
-        <div class="max-w-7xl mx-auto px-8 text-center">
-            <h2 class="text-2xl font-bold mb-12 text-gray-500 uppercase tracking-widest">Powering with Modern Stack</h2>
-            <div class="flex flex-wrap justify-center gap-10 opacity-60 grayscale hover:grayscale-0 transition duration-500">
-                <div class="flex flex-col items-center"><i class="fab fa-python text-5xl mb-2"></i><span>Python</span></div>
-                <div class="flex flex-col items-center"><i class="fas fa-database text-5xl mb-2"></i><span>SQL</span></div>
-                <div class="flex flex-col items-center"><i class="fab fa-js text-5xl mb-2"></i><span>JavaScript</span></div>
-                <div class="flex flex-col items-center"><i class="fas fa-microchip text-5xl mb-2"></i><span>Arduino</span></div>
-            </div>
+    <section class="py-24 px-5 md:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-3 gap-5">
+          <div class="panel-strong p-8 lg:col-span-1" data-aos="fade-up">
+            <span class="badge mb-5">Use Cases</span>
+            <h2 class="text-3xl font-black mb-5">Built for revenue, operations, and accuracy.</h2>
+            <p class="text-slate-400">These are the systems global buyers usually need when they are ready to move beyond generic templates.</p>
+          </div>
+          <div class="panel p-8" data-aos="fade-up" data-aos-delay="80">
+            <i class="fa-solid fa-user-tie text-teal-300 text-3xl mb-5"></i>
+            <h3 class="text-xl font-black mb-3">Lead & Sales Automation</h3>
+            <p class="text-slate-400">Capture leads, enrich data, score prospects, send alerts, and update CRM records automatically.</p>
+          </div>
+          <div class="panel p-8" data-aos="fade-up" data-aos-delay="160">
+            <i class="fa-solid fa-file-invoice text-amber-300 text-3xl mb-5"></i>
+            <h3 class="text-xl font-black mb-3">Document Processing</h3>
+            <p class="text-slate-400">Extract information from PDFs, invoices, forms, emails, and spreadsheets with validation steps.</p>
+          </div>
+          <div class="panel p-8" data-aos="fade-up">
+            <i class="fa-solid fa-headset text-violet-300 text-3xl mb-5"></i>
+            <h3 class="text-xl font-black mb-3">Support AI Systems</h3>
+            <p class="text-slate-400">Answer customer questions using approved knowledge, escalate complex issues, and log every conversation.</p>
+          </div>
+          <div class="panel p-8" data-aos="fade-up" data-aos-delay="80">
+            <i class="fa-solid fa-chart-pie text-rose-300 text-3xl mb-5"></i>
+            <h3 class="text-xl font-black mb-3">Reporting Dashboards</h3>
+            <p class="text-slate-400">Turn raw data into clean dashboards, automated reports, and decision-ready business views.</p>
+          </div>
+          <div class="panel p-8" data-aos="fade-up" data-aos-delay="160">
+            <i class="fa-solid fa-gears text-teal-300 text-3xl mb-5"></i>
+            <h3 class="text-xl font-black mb-3">Internal Tools</h3>
+            <p class="text-slate-400">Build custom admin panels and workflow tools around the exact process your team already follows.</p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Footer / Contact -->
-    <footer id="contact" class="py-20 px-8 text-center border-t border-gray-900">
-        <h2 class="text-4xl font-bold mb-8">Let's Build the Future.</h2>
-        <p class="text-gray-400 mb-10">Available for freelance contracts and global collaborations.</p>
-        <a href="mailto:your-email@example.com" class="text-indigo-400 text-xl font-bold border-b-2 border-indigo-400 pb-2 hover:text-white hover:border-white transition">Get in Touch <i class="fas fa-arrow-right ml-2"></i></a>
-        <div class="mt-20 text-gray-600 text-sm">
-            &copy; 2026 System Core Architecture. All Rights Reserved.
+    <section id="process" class="py-24 px-5 md:px-8 bg-black/30">
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-12">
+        <div data-aos="fade-right">
+          <span class="badge mb-5">Delivery Process</span>
+          <h2 class="text-4xl md:text-6xl font-black leading-tight mb-6">A professional build path from idea to production.</h2>
+          <p class="text-slate-400 text-lg">Buyers do not just need code. They need a reliable path to a working result, with risk reduced at every step.</p>
         </div>
-    </footer>
+        <div class="space-y-8">
+          <div class="timeline-item" data-aos="fade-left">
+            <h3 class="text-xl font-black">01. Discovery and workflow mapping</h3>
+            <p class="text-slate-400 mt-2">We define the business problem, users, data sources, constraints, and expected outcome before writing code.</p>
+          </div>
+          <div class="timeline-item" data-aos="fade-left" data-aos-delay="80">
+            <h3 class="text-xl font-black">02. Architecture and prototype</h3>
+            <p class="text-slate-400 mt-2">A lean prototype proves the logic, integrations, and user flow before the final build expands.</p>
+          </div>
+          <div class="timeline-item" data-aos="fade-left" data-aos-delay="160">
+            <h3 class="text-xl font-black">03. Build, test, and validate</h3>
+            <p class="text-slate-400 mt-2">Core features are built with logs, edge-case handling, test data, and output verification.</p>
+          </div>
+          <div class="timeline-item" data-aos="fade-left" data-aos-delay="240">
+            <h3 class="text-xl font-black">04. Deploy and hand over</h3>
+            <p class="text-slate-400 mt-2">The final system ships with setup instructions, usage notes, and practical maintenance guidance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 1000, once: true, offset: 100 });
-    </script>
+    <section id="stack" class="py-24 px-5 md:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-12" data-aos="fade-up">
+          <span class="badge mb-5">Modern Stack</span>
+          <h2 class="text-4xl md:text-6xl font-black leading-tight">Tools chosen for speed, reliability, and maintainability.</h2>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3" data-aos="fade-up" data-aos-delay="120">
+          <span class="stack-chip"><i class="fa-brands fa-python text-teal-300"></i> Python</span>
+          <span class="stack-chip"><i class="fa-solid fa-database text-amber-300"></i> SQL</span>
+          <span class="stack-chip"><i class="fa-brands fa-js text-yellow-300"></i> JavaScript</span>
+          <span class="stack-chip"><i class="fa-brands fa-react text-cyan-300"></i> React</span>
+          <span class="stack-chip"><i class="fa-solid fa-server text-violet-300"></i> APIs</span>
+          <span class="stack-chip"><i class="fa-solid fa-brain text-rose-300"></i> LLMs</span>
+          <span class="stack-chip"><i class="fa-solid fa-table text-emerald-300"></i> Excel Automation</span>
+          <span class="stack-chip"><i class="fa-solid fa-cloud text-blue-300"></i> Cloud Deployments</span>
+          <span class="stack-chip"><i class="fa-solid fa-microchip text-orange-300"></i> Arduino / IoT</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 px-5 md:px-8 bg-black/30">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl mb-12" data-aos="fade-up">
+          <span class="badge mb-5">FAQ</span>
+          <h2 class="text-4xl md:text-6xl font-black leading-tight">Questions serious clients usually ask.</h2>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-5">
+          <details class="panel p-6" open data-aos="fade-up">
+            <summary class="cursor-pointer font-black text-lg">Can you build from only a business idea?</summary>
+            <p class="text-slate-400 mt-4">Yes. The first phase converts your idea into workflow maps, features, data requirements, and a realistic build plan.</p>
+          </details>
+          <details class="panel p-6" data-aos="fade-up" data-aos-delay="80">
+            <summary class="cursor-pointer font-black text-lg">Do you provide source code and documentation?</summary>
+            <p class="text-slate-400 mt-4">Yes. Delivery can include source files, setup instructions, API notes, environment guidance, and usage documentation.</p>
+          </details>
+          <details class="panel p-6" data-aos="fade-up" data-aos-delay="160">
+            <summary class="cursor-pointer font-black text-lg">Can existing tools be integrated?</summary>
+            <p class="text-slate-400 mt-4">Yes. CRMs, spreadsheets, databases, email platforms, payment tools, AI APIs, and third-party services can be connected where APIs are available.</p>
+          </details>
+          <details class="panel p-6" data-aos="fade-up" data-aos-delay="240">
+            <summary class="cursor-pointer font-black text-lg">What makes the build professional?</summary>
+            <p class="text-slate-400 mt-4">Clean structure, maintainable code, validation, error handling, logs, responsive UI, documented flows, and clear milestones.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="py-24 px-5 md:px-8">
+    <div class="max-w-7xl mx-auto panel-strong p-8 md:p-12 grid lg:grid-cols-[1fr_0.85fr] gap-10 items-center">
+      <div data-aos="fade-right">
+        <span class="badge mb-5">Start Project</span>
+        <h2 class="text-4xl md:text-6xl font-black leading-tight mb-6">Tell buyers exactly why you are the right builder.</h2>
+        <p class="text-slate-400 text-lg leading-relaxed mb-8">
+          Replace the sample contact details below with your real email, WhatsApp, portfolio, LinkedIn, and project packages. Keep this page focused on trust, clarity, and outcome.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="mailto:your-email@example.com" class="btn-primary">Email Now <i class="fa-solid fa-envelope"></i></a>
+          <a href="https://wa.me/910000000000" class="btn-secondary">WhatsApp <i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <form class="panel p-6 space-y-4" data-aos="fade-left">
+        <div>
+          <label class="text-sm font-bold text-slate-300">Name</label>
+          <input class="w-full mt-2 bg-black/30 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-teal-300" placeholder="Your name" />
+        </div>
+        <div>
+          <label class="text-sm font-bold text-slate-300">Email</label>
+          <input type="email" class="w-full mt-2 bg-black/30 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-teal-300" placeholder="you@company.com" />
+        </div>
+        <div>
+          <label class="text-sm font-bold text-slate-300">Project Need</label>
+          <textarea rows="4" class="w-full mt-2 bg-black/30 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-teal-300" placeholder="AI assistant, automation, dashboard, data system..."></textarea>
+        </div>
+        <button type="button" class="btn-primary w-full justify-center">Request Consultation <i class="fa-solid fa-arrow-right"></i></button>
+      </form>
+    </div>
+    <div class="max-w-7xl mx-auto mt-10 flex flex-col md:flex-row gap-4 justify-between text-sm text-slate-500">
+      <p>&copy; 2026 System Core Architecture. All rights reserved.</p>
+      <p>AI Automation · Python · SQL · Dashboards · Micro-SaaS</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 850, once: true, offset: 90 });
+
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuButton.addEventListener("click", () => mobileMenu.classList.toggle("open"));
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => mobileMenu.classList.remove("open"));
+    });
+
+    const canvas = document.getElementById("networkCanvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * window.devicePixelRatio;
+      canvas.height = window.innerHeight * window.devicePixelRatio;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+      const count = Math.min(80, Math.floor(window.innerWidth / 18));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.6 + 0.8
+      }));
+    }
+
+    function animateNetwork() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
+        if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(94, 234, 212, 0.75)";
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 135) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(94, 234, 212, ${0.16 * (1 - dist / 135)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      });
+      requestAnimationFrame(animateNetwork);
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    animateNetwork();
+  </script>
 </body>
 </html>
