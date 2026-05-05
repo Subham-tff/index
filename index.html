@@ -3,82 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strategic Digital Architect | Portfolio</title>
+    <title>Strategic Tech Architect | Digital Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: white; overflow-x: hidden; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .gradient-text { background: linear-gradient(90deg, #6366f1, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-3d-sphere {
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, #4f46e5 0%, transparent 70%);
-            filter: blur(60px); animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        :root { --primary: #6366f1; --accent: #00f2ff; }
+        body { font-family: 'Inter', sans-serif; background: #020617; color: #f8fafc; scroll-behavior: smooth; }
+        .glass-card { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .glass-card:hover { border-color: var(--primary); transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2); }
+        .mesh-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #020617 100%); }
+        .glow { position: absolute; width: 300px; height: 300px; background: var(--primary); filter: blur(120px); opacity: 0.2; border-radius: 50%; z-index: -1; }
+        .animated-text { background: linear-gradient(to right, #818cf8, #c084fc, #00f2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .status-badge { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #4ade80; padding: 4px 12px; border-radius: 99px; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 p-6 flex justify-between items-center glass">
-        <div class="text-2xl font-bold tracking-tighter">PROJECT.<span class="text-indigo-500">X</span></div>
-        <div class="space-x-8 hidden md:flex">
-            <a href="#work" class="hover:text-indigo-400 transition">Work</a>
-            <a href="#about" class="hover:text-indigo-400 transition">Strategy</a>
-            <a href="#contact" class="px-5 py-2 bg-indigo-600 rounded-full hover:bg-indigo-500 transition">Hire Me</a>
+    <div class="mesh-gradient"></div>
+    <div class="glow" style="top: 10%; left: 10%;"></div>
+    <div class="glow" style="bottom: 10%; right: 10%;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-md">
+        <div class="text-xl font-black tracking-widest">SYSTEM.<span class="text-indigo-500">CORE</span></div>
+        <div class="space-x-8 hidden md:flex items-center text-sm font-medium">
+            <a href="#services" class="hover:text-indigo-400 transition">Solutions</a>
+            <a href="#stack" class="hover:text-indigo-400 transition">Stack</a>
+            <a href="#contact" class="bg-indigo-600 px-6 py-2 rounded-full hover:shadow-[0_0_20px_rgba(99,102,241,0.5)] transition">Start Project</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="h-screen flex flex-col justify-center items-center text-center relative px-4">
-        <div class="hero-3d-sphere absolute z-0"></div>
-        <h1 class="text-6xl md:text-8xl font-bold z-10" data-aos="zoom-out-up">
-            Building <span class="gradient-text">Future</span> <br> Systems.
+    <header class="h-screen flex flex-col justify-center items-center text-center px-6">
+        <div class="status-badge mb-6" data-aos="fade-down">● Available for Global Projects</div>
+        <h1 class="text-5xl md:text-8xl font-black mb-6" data-aos="fade-up">
+            Developing <span class="animated-text">Intelligent</span><br>Digital Assets.
         </h1>
-        <p class="mt-6 text-gray-400 max-w-lg z-10" data-aos="fade-up" data-aos-delay="200">
-            High-performance AI companions, automation scripts, and strategic digital assets. I don't just code; I solve.
+        <p class="text-gray-400 max-w-2xl text-lg md:text-xl mb-10" data-aos="fade-up" data-aos-delay="200">
+            Specializing in high-accuracy Python automation, strategic AI integration, and high-conversion software architecture.
         </p>
+        <div class="flex space-x-4" data-aos="fade-up" data-aos-delay="400">
+            <a href="#services" class="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-indigo-500 hover:text-white transition duration-300">View Ecosystem</a>
+        </div>
+    </header>
+
+    <!-- Why Us / Accuracy Section -->
+    <section id="accuracy" class="py-24 px-8 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-4xl font-bold mb-6">Built for <span class="text-indigo-500">Precision.</span></h2>
+                <p class="text-gray-400 mb-8 text-lg">In the B2B world, accuracy is everything. My systems are stress-tested for 99.9% reliability in data handling and automation.</p>
+                <ul class="space-y-4">
+                    <li class="flex items-center"><i class="fas fa-check-circle text-indigo-500 mr-3"></i> Clean, Documented Python Logic</li>
+                    <li class="flex items-center"><i class="fas fa-check-circle text-indigo-500 mr-3"></i> SQL Database Optimization</li>
+                    <li class="flex items-center"><i class="fas fa-check-circle text-indigo-500 mr-3"></i> Scalable Micro-SaaS Architecture</li>
+                </ul>
+            </div>
+            <div class="glass-card p-10 text-center" data-aos="fade-left">
+                <div class="text-6xl font-black text-indigo-500 mb-2">99.9%</div>
+                <div class="text-gray-400 uppercase tracking-widest text-sm">Execution Accuracy</div>
+                <div class="mt-8 h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-indigo-500 w-[99%]"></div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Services / 3D Cards -->
-    <section id="work" class="py-20 px-10">
-        <h2 class="text-3xl font-bold mb-12 text-center" data-aos="fade-right">My Arsenals</h2>
+    <!-- Services Grid -->
+    <section id="services" class="py-24 px-8 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-16" data-aos="fade-up">Core Solutions</h2>
         <div class="grid md:grid-cols-3 gap-8">
-            <!-- Card 1 -->
-            <div class="glass p-8 rounded-3xl hover:border-indigo-500 transition duration-500 transform hover:-translate-y-4" data-aos="fade-up">
-                <div class="text-4xl mb-4">⚙️</div>
-                <h3 class="text-xl font-bold mb-2">Custom SaaS</h3>
-                <p class="text-gray-400">Scaleable cloud solutions tailored for global businesses.</p>
+            <div class="glass-card p-8" data-aos="fade-up">
+                <i class="fas fa-robot text-4xl text-indigo-500 mb-6"></i>
+                <h3 class="text-xl font-bold mb-4">AI Companions</h3>
+                <p class="text-gray-400">Custom LLM-based assistants tailored for business strategy and niche automation.</p>
             </div>
-            <!-- Card 2 -->
-            <div class="glass p-8 rounded-3xl hover:border-indigo-500 transition duration-500 transform hover:-translate-y-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-4xl mb-4">🤖</div>
-                <h3 class="text-xl font-bold mb-2">AI Integration</h3>
-                <p class="text-gray-400">Next-gen AI companions and workflow automation scripts.</p>
+            <div class="glass-card p-8" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-code text-4xl text-blue-400 mb-6"></i>
+                <h3 class="text-xl font-bold mb-4">Automation Scripts</h3>
+                <p class="text-gray-400">Python-based workflows that eliminate manual tasks and human error.</p>
             </div>
-            <!-- Card 3 -->
-            <div class="glass p-8 rounded-3xl hover:border-indigo-500 transition duration-500 transform hover:-translate-y-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-4xl mb-4">🎨</div>
-                <h3 class="text-xl font-bold mb-2">UI/UX Strategy</h3>
-                <p class="text-gray-400">Psychology-driven designs that convert visitors into buyers.</p>
+            <div class="glass-card p-8" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-database text-4xl text-emerald-400 mb-6"></i>
+                <h3 class="text-xl font-bold mb-4">Data Systems</h3>
+                <p class="text-gray-400">Optimized SQL architectures for high-speed data retrieval and management.</p>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section id="contact" class="py-32 text-center">
-        <div class="glass mx-auto max-w-4xl p-16 rounded-[4rem]" data-aos="flip-up">
-            <h2 class="text-5xl font-bold mb-6">Ready to dominate?</h2>
-            <p class="mb-10 text-gray-400">Let's build something world-class together.</p>
-            <a href="mailto:your-email@example.com" class="px-10 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition">Email Me Now</a>
+    <!-- Tech Stack -->
+    <section id="stack" class="py-24 bg-indigo-900/10">
+        <div class="max-w-7xl mx-auto px-8 text-center">
+            <h2 class="text-2xl font-bold mb-12 text-gray-500 uppercase tracking-widest">Powering with Modern Stack</h2>
+            <div class="flex flex-wrap justify-center gap-10 opacity-60 grayscale hover:grayscale-0 transition duration-500">
+                <div class="flex flex-col items-center"><i class="fab fa-python text-5xl mb-2"></i><span>Python</span></div>
+                <div class="flex flex-col items-center"><i class="fas fa-database text-5xl mb-2"></i><span>SQL</span></div>
+                <div class="flex flex-col items-center"><i class="fab fa-js text-5xl mb-2"></i><span>JavaScript</span></div>
+                <div class="flex flex-col items-center"><i class="fas fa-microchip text-5xl mb-2"></i><span>Arduino</span></div>
+            </div>
         </div>
     </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="py-20 px-8 text-center border-t border-gray-900">
+        <h2 class="text-4xl font-bold mb-8">Let's Build the Future.</h2>
+        <p class="text-gray-400 mb-10">Available for freelance contracts and global collaborations.</p>
+        <a href="mailto:your-email@example.com" class="text-indigo-400 text-xl font-bold border-b-2 border-indigo-400 pb-2 hover:text-white hover:border-white transition">Get in Touch <i class="fas fa-arrow-right ml-2"></i></a>
+        <div class="mt-20 text-gray-600 text-sm">
+            &copy; 2026 System Core Architecture. All Rights Reserved.
+        </div>
+    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: true });
+        AOS.init({ duration: 1000, once: true, offset: 100 });
     </script>
 </body>
 </html>
